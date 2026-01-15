@@ -48,10 +48,7 @@ public class Account {
     public double retirer(double montant){
         return montant -=solde;
     }
-//    public void afficherComptes(){
-//        for(){
-//
-//        }
+
     }
 
 
@@ -60,4 +57,4 @@ public class Account {
 
 
 
-}
+
