@@ -1,7 +1,7 @@
 public class SavingsAccount extends Account{
     private  double tauxInteret ;
-    public SavingsAccount(String numeroCompte,double solde,String type,double tauxInteret){
-        super(numeroCompte, solde,type);
+    public SavingsAccount(String numeroCompte,double solde,String type,double tauxInteret,Client client){
+        super(numeroCompte, solde,type,client);
             this.tauxInteret=tauxInteret;
 
         }
