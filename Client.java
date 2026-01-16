@@ -11,7 +11,23 @@ public class Client extends Person {
 
 
     }
-    public
+
+    public String getNumeroClient() {
+        return numeroClient;
+    }
+
+    public void setNumeroClient(String numeroClient) {
+        this.numeroClient = numeroClient;
+    }
+
+    public ArrayList<Account> getComptes() {
+        return comptes;
+    }
+    // ajouter Clients
+    public void setComptes(Account account) {
+        this.comptes.add(account);
+    }
+
     public String toString(){
         return super.toString()+ "numéro de client :"+numeroClient;
 

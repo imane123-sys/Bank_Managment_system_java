@@ -36,9 +36,9 @@ public class Account {
         this.type = type;
     }
 
-    public double consulterSolde(double solde){
+    public double consulterSolde(){
 
-         return this.solde = solde;
+         return this.solde;
 
     }
     public  double deposer(double montant){
