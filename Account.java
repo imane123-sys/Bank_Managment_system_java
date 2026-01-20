@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Account {
     private String numeroCompte;
     private double solde;
@@ -37,19 +39,29 @@ public class Account {
     }
 
     public double consulterSolde(){
-
-         return this.solde;
+        return this.solde;
 
     }
     public  double deposer(double montant){
-        return  montant+=solde;
+
+
+        return  solde+=montant;
     }
 
     public double retirer(double montant){
-        return montant -=solde;
+        return solde -=montant;
     }
 
+    @Override
+    public String toString() {
+        return "Account{" +
+                "numeroCompte='" + numeroCompte + '\'' +
+                ", solde=" + solde +
+                ", type='" + type + '\'' +
+                ", client=" + client +
+                '}';
     }
+}
 
 
 

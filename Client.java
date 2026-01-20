@@ -7,9 +7,6 @@ public class Client extends Person {
         super( id, nom,email);
         this.numeroClient = numeroClient;
 
-
-
-
     }
 
     public String getNumeroClient() {
