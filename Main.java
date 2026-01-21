@@ -23,7 +23,7 @@ public class Main {
             System.out.println("Entrez un numéro entre 1 et 8 ");
 
             System.out.println("1.ajouter Client");
-            System.out.println("2.Créer Compte");
+            System.out.println("2.Créer Compte normal/épargne ");
             System.out.println("3.supprimer Compte");
             System.out.println("4.Consulter Solde");
             System.out.println("5.diposer d'argent");

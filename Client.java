@@ -24,7 +24,7 @@ public class Client extends Person {
     public void setComptes(Account account) {
         this.comptes.add(account);
     }
-
+//toString existe dans classe Object
     public String toString(){
         return super.toString()+ "numéro de client :"+numeroClient;
 

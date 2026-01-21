@@ -31,6 +31,7 @@ public class Bank {
 
 
     }
+
     public void creerCompte(){
         Scanner scanner =new Scanner(System.in);
         System.out.println("entrez numero compte");
@@ -41,8 +42,12 @@ public class Bank {
         scanner.nextLine();
 
 
-        System.out.println("entrez type de compte");
+        System.out.println("entrez type de compte (normal/epargne)");
         String typeCompte = scanner.nextLine();
+        boolean isSavingAccount = false;
+        if(typeCompte.equals("epargne")){
+            isSavingAccount = true;
+        }
 
 //        recuperer client
         for(Client c:clients){
@@ -59,11 +64,23 @@ public class Bank {
             }
 
         }
-        Account account =new Account(numroCompte,solde,typeCompte,clientRe);
-        clientRe.setComptes(account);
-        comptes.add(account);
+        if (isSavingAccount){
 
-        System.out.println("le compte est crée avec succés!");
+            SavingsAccount savingAccount =new SavingsAccount(numroCompte,solde,typeCompte,clientRe);
+            clientRe.setComptes(savingAccount);
+            comptes.add(savingAccount);
+
+            System.out.println("le compte d'épargne est crée avec succés!");
+
+        }else {
+            Account account =new Account(numroCompte,solde,typeCompte,clientRe);
+            clientRe.setComptes(account);
+            comptes.add(account);
+
+            System.out.println("le compte  normal est crée avec succés!");
+
+        }
+
 
 
 
@@ -129,23 +146,30 @@ public class Bank {
     public void consulterSolde(){
         for(Account a:comptes){
             System.out.println(a);
-
+                                                                                            ²
 
         }
         Scanner sc= new Scanner(System.in);
         System.out.println("entrez le numéro de compte:");
         String numeroCompteRec = sc.nextLine();
         Account account=null;
+
         for(Account a:comptes){
             if(a.getNumeroCompte().equals(numeroCompteRec)){
                 account=a;
 
             };
 
+        }
+        if(account.getType().equals("normal")){
+            System.out.println("le numéro de compte de ce client est:"+numeroCompteRec+"et le solde est:"+account.getSolde());
 
+
+        }else{
+            SavingsAccount sa =(SavingsAccount) account;
+            sa.appliquerInterets();
 
         }
-        System.out.println("le numéro de compte de ce client est:"+numeroCompteRec+"et le solde est:"+account.getSolde());
 
 
 
