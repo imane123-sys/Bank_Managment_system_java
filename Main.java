@@ -29,7 +29,9 @@ public class Main {
             System.out.println("5.diposer d'argent");
             System.out.println("6.retirer un montant ");
             System.out.println("7.afficher tous les comptes ");
-            System.out.println("8.quitter ");
+            System.out.println("8.exporter fichier excel  ");
+
+            System.out.println("9.quitter ");
             choix=scanner.nextInt();
             scanner.nextLine();
             switch(choix){
@@ -56,7 +58,12 @@ public class Main {
                     break;
 
                 case 8:
+                    b1.exporterExcel();
+                case 9:
+
                     System.out.println("le programme est terminé au revoir");
+                    break;
+
 
                 default:
                     System.out.println("choix invalide entrez un numéro entre 1 et 8");

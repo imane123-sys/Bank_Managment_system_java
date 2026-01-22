@@ -1,3 +1,7 @@
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -146,7 +150,7 @@ public class Bank {
     public void consulterSolde(){
         for(Account a:comptes){
             System.out.println(a);
-                                                                                            ²
+
 
         }
         Scanner sc= new Scanner(System.in);
@@ -220,6 +224,44 @@ public class Bank {
 
 
 
+    }
+
+
+    // export the data as exel
+    public void exporterExcel() {
+
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Comptes");
+        Row header = sheet.createRow(0);
+        header.createCell(0).setCellValue("Numero Compte");
+        header.createCell(1).setCellValue("Nom");
+        header.createCell(2).setCellValue("Prenom");
+        header.createCell(3).setCellValue("Solde");
+
+        int rowNum = 1;
+
+        for (Account a : comptes) {
+            Row row = sheet.createRow(rowNum++);
+
+            row.createCell(0).setCellValue(a.getNumeroCompte());
+            row.createCell(1).setCellValue(a.getClient().getNom());
+            row.createCell(2).setCellValue(a.getClient().getNom());
+            row.createCell(3).setCellValue(a.getSolde());
+        }
+
+        try (FileOutputStream fos = new FileOutputStream("C:\\Users\\RM\\Bureau\\comptesExport.xlsx")) {
+            workbook.write(fos);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            workbook.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Export Excel terminé avec succès !");
     }
 
 }

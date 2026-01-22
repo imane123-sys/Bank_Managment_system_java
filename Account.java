@@ -14,6 +14,14 @@ public class Account {
 
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
     public String getNumeroCompte(){
         return this.numeroCompte;
     }
