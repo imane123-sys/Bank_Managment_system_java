@@ -31,7 +31,7 @@ public class Bank {
         idClient++;
         Client c1 = new Client(idClient,nom,email,numeroClient);
         clients.add(c1);
-        System.out.println("client est ajoute"+idClient);
+        System.out.println("client "+idClient+ "est ajouté avec succés!!");
 
 
     }
@@ -40,10 +40,26 @@ public class Bank {
         Scanner scanner =new Scanner(System.in);
         System.out.println("entrez numero compte");
         String numroCompte = scanner.nextLine();
-
+        double solde=0.0;
         System.out.println("entrez solde");
-        double solde = scanner.nextDouble();
-        scanner.nextLine();
+
+        // generate an exception
+
+        try{
+             solde = scanner.nextDouble();
+
+
+        }
+        catch (Exception e){
+            System.out.println("vous devez enter un numéro valide"+e.getMessage());
+        }
+
+        if(solde<=0){
+            System.out.println("veuillez enter un montant supérieure à 0");
+            return;
+        }
+
+            scanner.nextLine();
 
 
         System.out.println("entrez type de compte (normal/epargne)");
@@ -165,11 +181,18 @@ public class Bank {
             };
 
         }
+        if (account == null) {
+            System.out.println("ce compte n'existe pas");
+            return;
+
+        }
         if(account.getType().equals("normal")){
             System.out.println("le numéro de compte de ce client est:"+numeroCompteRec+"et le solde est:"+account.getSolde());
 
 
-        }else{
+        }
+
+        else{
             SavingsAccount sa =(SavingsAccount) account;
             sa.appliquerInterets();
 
@@ -195,7 +218,11 @@ public class Bank {
         }
          if (account == null){
              System.out.println("Compte n'existe pas !!!!!!!!");
-         }else{
+         }
+         else if(account.getSolde() !=0){
+             System.out.println("impossible de supprimer un compte ou le solde n'est pas null"+account.getSolde());
+         }
+         else{
              comptes.remove(account);
              System.out.println("le compte est supprimé avec succés!");
          }
@@ -219,10 +246,6 @@ public class Bank {
 
 
             }
-
-
-
-
 
     }
 
@@ -249,7 +272,7 @@ public class Bank {
             row.createCell(3).setCellValue(a.getSolde());
         }
 
-        try (FileOutputStream fos = new FileOutputStream("C:\\Users\\RM\\Bureau\\comptesExport.xlsx")) {
+        try (FileOutputStream fos = new FileOutputStream("C:\\Users\\RM\\Desktop\\comptesExport.xlsx")) {
             workbook.write(fos);
         } catch (IOException e) {
             e.printStackTrace();
@@ -262,6 +285,69 @@ public class Bank {
         }
 
         System.out.println("Export Excel terminé avec succès !");
+    }
+
+    public  void transfererArgent(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Entrez le montant à envoyer:");
+        double montanteEnvoye=scanner.nextDouble();
+        scanner.nextLine();
+        System.out.println("Entrez le numéro de compte source");
+        String ncompteSource= scanner.nextLine();
+        System.out.println("Entrez le numéro de compte destination");
+        String ncompteDestination = scanner.nextLine();
+
+
+        if(montanteEnvoye <=0){
+            System.out.println("le montant doit etre superieure a 0");
+            return;
+        }
+        Account compteSource =null;
+        Account compteDestination = null;
+        for(Account a: comptes) {
+            if (a.getNumeroCompte().equals(ncompteSource)) {
+
+                compteSource = a;
+
+
+            }
+            if (a.getNumeroCompte().equals(ncompteDestination)) {
+                compteDestination = a;
+
+            }
+
+        }
+            if(compteSource == null){
+                System.out.println("le compte source n'existe pas");
+                return;
+
+            }
+            if( compteDestination==null){
+                System.out.println("le compte de destination n'existe pas");
+                return;
+
+            }
+
+
+            if(compteSource.getSolde() <montanteEnvoye){
+                System.out.println("solde insuffisant dans le compte source");
+                return;
+            }
+            compteSource.setSolde(compteSource.getSolde() - montanteEnvoye);
+            compteDestination.setSolde(compteDestination.getSolde() + montanteEnvoye);
+            System.out.println("transfert effectué avec succés");
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
 }

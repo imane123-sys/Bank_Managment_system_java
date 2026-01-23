@@ -17,10 +17,10 @@ public class Main {
 //        b1.afficherComptes();
         Scanner scanner = new Scanner(System.in);
         Bank b1 = new Bank();
-        int choix;
+        int choix =0;
         do{
             System.out.println("========================================Menu Console ========================");
-            System.out.println("Entrez un numéro entre 1 et 8 ");
+            System.out.println("Entrez un numéro entre 1 et 10 ");
 
             System.out.println("1.ajouter Client");
             System.out.println("2.Créer Compte normal/épargne ");
@@ -30,9 +30,21 @@ public class Main {
             System.out.println("6.retirer un montant ");
             System.out.println("7.afficher tous les comptes ");
             System.out.println("8.exporter fichier excel  ");
+            System.out.println("9.transfert d'argent ");
 
-            System.out.println("9.quitter ");
-            choix=scanner.nextInt();
+            System.out.println("10.quitter ");
+
+
+            try{
+                choix=scanner.nextInt();
+
+            }
+            catch(Exception e){
+                System.out.println("Erreur!!");
+                System.out.println("le type d'erreur est:"+e.getMessage());
+
+
+            }
             scanner.nextLine();
             switch(choix){
                 case 1:
@@ -60,13 +72,14 @@ public class Main {
                 case 8:
                     b1.exporterExcel();
                 case 9:
-
+                    b1.transfererArgent();
+                case 10:
                     System.out.println("le programme est terminé au revoir");
                     break;
 
 
                 default:
-                    System.out.println("choix invalide entrez un numéro entre 1 et 8");
+                    System.out.println("choix invalide entrez un numéro entre 1 et 10");
 
 
 
@@ -75,7 +88,7 @@ public class Main {
             }
 
 
-        }while(choix!=0);
+        }while(choix!=10);
 
 
 
